@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <title>Document</title>
+  <style>
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 0px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.container div {
+  /* background-color: #4472C4; 4472C4 */
+  /* float: right; */
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  border: 0px #000;
+  outline: solid 0px;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+  /* height: 100px; */
+  /* line-height: 100px; */
+  vertical-align: middle;
+}
+.tablinks div {
+    /* display:flex;
+    justify-content:space-between; */
+    /* margin-left: 1rem; */
+}
+/* Change background color of buttons on hover */
+/* .tab div:hover, .tabtext div:hover, .tabtext_lower div:hover {
+  background-color: #DAE3F3;
+} */
+
+/* Create an active/current tablink class */
+/* .tab div.active, .tabtext div.active, .tabtext_lower div.active {
+    background-color: #DAE3F3;
+} */
+
+.blank {
+    background-color: #DAE3F3 !important;
+    border-left: none;
+}
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-left: 0px solid #ccc;
+  border-top: none;
+}      
+
+.tabcontent {
+  /* animation: fadeEffect 1s; Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    background-color: #DAE3F3 !important;
+    font-size: 1.5vh;
+    text-align: left;
+    font-family: 'GmarketSansMedium';
+    font-weight:normal;
+    font-style:normal;
+    color:#fff;
+}
+.tablinks {
+    border-bottom: 0px solid #ccc;
+}
+.tabtext {
+    background-color:inherit; 
+    width:100%;
+    color:#fff;
+    /* margin-right: 1rem; */
+}
+.popup-wrap {
+    /* background-color:rgba(0,0,0,.3);  */
+    justify-content:center; 
+    align-items:center;
+    /* position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0; */
+    /* display:none;  */
+    /* padding:15px; */
+    backdrop-filter: blur(4px);
+    backdrop-filter: grayscale(1);
+    -webkit-backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: grayscale(1);
+}
+.popup{
+  /* width:100%;
+  max-width:1000px; */
+  /* border-radius:10px; */
+  overflow:hidden;
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.2); 
+  display:flex;
+  justify-content:center;
+
+}
+.header {
+    background: linear-gradient(90deg, rgba(39,63,149, 1) , rgb(26, 110, 182));
+}
+.header-font {
+    font-size: 3.0vh;
+    text-align: left;
+    font-family: 'GmarketSansBold';
+    font-weight:normal;
+    font-style:normal;
+    color:#fff;
+}
+.header-font-medium {
+    font-size: 3.0vh;
+    text-align: left;
+    font-family: 'GmarketSans';
+    font-weight:normal;
+    font-style:normal;
+    color:#fff;
+}
+
+.container div {
+    object-fit: contain;
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+}
+.one {
+    /* -webkit-mask-image: url(/img/mask.png);
+    mask-image: url(/img/mask.png);   */
+    border-top-right-radius: 2vh;
+    /* background-image: url(img/mask.png); */
+}    
+.layer-0 {
+    /* background:linear-gradient(0.25turn, rgb(29, 103, 178), rgba(39,63,149, 1));     */
+    background:radial-gradient(100% 100% at 0% 100%, rgb(8, 26, 94) 0%, rgba(26, 110, 182,1) 100%);
+}
+.footer-background {
+    background:linear-gradient(90deg, rgba(39,63,149, 1) , rgb(26, 110, 182));
+    /* background:radial-gradient(100% 100% at 0% 50%, rgb(8, 26, 94) 0%, rgba(26, 110, 182,1) 100%); */
+}
+.footer-font {
+    font-size: 3.5vh;
+    text-align: left;
+    font-family: 'GmarketSansBold';
+    font-weight:normal;
+    font-style:normal;
+    color:#fff;
+}
+.footer-font-small {
+    font-size: 1.5vh;
+    text-align: left;
+    font-family: 'GmarketSansMedium';
+    font-weight:normal;
+    font-style:normal;
+    color:#fff;
+}
+/* #playpen {
+  background: radial-gradient(ellipse 100px 100px at center, yellow 0%, orange 50%, red 100%);
+  text-align: center;
+  height: 200px;
+  line-height: 200px;
+} */
+#playpen {
+    /* background: radial-gradient(200px 200px at 200px 0px, rgb(178, 123, 255) 0%, rgba(178,123,255,1) 33% 50%, rgba(38,77,181,0) 90%); */
+}
+#round {
+    /* background: radial-gradient(50px 50px at 20px 20px, rgb(110, 138, 222, 1) 0%, rgb(110, 138, 222, 1) 50%); */
+    /* background: radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c); */
+    /* background-color:rgb(15, 163, 79) */
+    /* --radius: 80px; */
+    /* width:var(--radius);
+    height:var(--radius); */
+    width: 40%;
+    height: 30%;
+    position:absolute;
+    left:15%; 
+    top:10%; 
+    /* border-radius:calc(var(--radius)/2);  */
+    border-radius:50%;
+    background-color:rgb(110, 138, 222);
+}
+#round-selected {
+    /* background: radial-gradient(50px 50px at 20px 20px, rgb(110, 138, 222, 1) 0%, rgb(110, 138, 222, 1) 50%); */
+    /* background: radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c); */
+    /* background-color:rgb(15, 163, 79) */
+    /* --radius: 80px; */
+    /* width:var(--radius);
+    height:var(--radius); */
+    width: 7%;
+    height: 4%;
+    position:absolute;
+    left:67%; 
+    top:80%; 
+    /* border-radius:calc(var(--radius)/2);  */
+    border-radius:50%;
+    background-color:rgb(31, 93, 168);
+    transition: 0.3s;
+}
+.separator {
+    /* height:5px; */
+}
+.right-menu-font-size {
+    font-size: 2.4vw;
+    /* text-align: left; */
+    font-family: 'GmarketSansMedium';
+    font-weight:normal;
+    font-style:normal;
+}
+.font-content-header {
+    font-size: 2.2vw;
+    text-align: center;
+    font-family: 'GmarketSansMedium';
+    font-weight:normal;
+    font-style:normal;
+    vertical-align: middle;
+    margin-top: 0.3vw;
+}
+.font-content-header4 {
+    font-size: 2.0vw;
+    text-align: center;
+    font-family: 'GmarketSansMedium';
+    font-weight:normal;
+    font-style:normal;
+    margin-top: 0.3vw;
+}
+.font-light {
+    font-size: 2.0vw;
+    text-align: center;
+    font-family: 'GmarketSansLight';
+    font-weight:normal;
+    font-style:normal;
+    margin-top: 0.3vw;
+}
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('font/GmarketSansTTFLight.woff') format('woff');
+    /* url('font/songmyung-regular-webfont.woff2') format('woff2'),
+         url('font/songmyung-regular-webfont.woff') format('woff'),
+         ; */
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('font/GmarketSansTTFMedium.woff') format('woff');
+    /* url('font/songmyung-regular-webfont.woff2') format('woff2'),
+         url('font/songmyung-regular-webfont.woff') format('woff'),
+         ; */
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('font/GmarketSansTTFBold.woff') format('woff');
+    /* url('font/songmyung-regular-webfont.woff2') format('woff2'),
+         url('font/songmyung-regular-webfont.woff') format('woff'),
+         ; */
+    font-weight: normal;
+    font-style: normal;
+}
+.popup-text {
+  vertical-align: middle;
+  overflow: hidden;
+  /* line-height: 10px; */
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.popup-text span {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+  </style>
+</head>
+<body style="width:100%; height:100vh; overflow-x:hidden;">
+    <div style="display:grid; grid-template-rows: 1fr 6fr 0.05fr 1.5fr 0.05fr; width:100%; height:100%">
+        <div class="font-light" id="round-selected" style="display:flex; justify-content:center; align-items:center; z-index:400; font-size:2vh;">
+            ^
+        </div>
+
+        <!-- popup -->
+        <div id="popup-window-top" class="font-light" style="position:absolute; display:flex; justify-content:center; align-items:center; z-index:400; font-size:2vh; width:60%; height:40%; left:30%;top:30%;">
+            <div id="popup-window" style="display:flex;width:90%; height:90%; background-color:rgb(255,255,255);">
+                <div class="popup popup-wrap" style="display:grid;justify-content:center; align-content:center; 
+                grid-template-columns:1fr; grid-template-rows:0.03fr 1fr 0.03fr 0.5fr; grid-gap:-10px; width:90%; height:90%; position:absolute; left:5%;">
+                    <div style="grid-row:1;width:90%;height:100%;"></div>
+                    <div style="grid-row:2; background-color:rgb(240,240,240);width:96%;margin-left:2%;">
+                        <div id="popup-img" style="overflow:hidden;">
+                            <img src="img/portfolio1.png" width="100%">
+                        </div>
+                        <div id="popup-video">
+                            <video id="videoClip" width="100%" height="100%" playsinline>
+                                <source src="video/When She Leaves by @Per-Olov Kindgren.mp4"
+                                        type="video/mp4">
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>                
+                        </div>
+                    </div>
+                    <div style="grid-row:3;width:90%;height:100%;"></div>
+                    <div style="display:flex;justify-content:flex-start; grid-row:4; color:rgba(0,0,0,.3);width:96%;margin-left:2%">
+                        <div class="popup-text font-light" style="color:rgb(0,0,0);">
+                            <span>내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 내용 작성 성 내용 작성 내용 작성 내용 작성 내용 작성</span>
+                          </div>
+                        </div>
+                </div>
+            </div>
+            <div id="close-popup" class="popup" style="position:absolute; right:0%;top:0%;border-radius:50%; font-size:1vh; color:rgb(30,30,30); background-color:rgb(255,255,255);width:10%;height:10%;display:flex;justify-content:center; align-items:center;">X</div>
+        </div>
+        <!-- header -->
+        <div style="grid-row:1; background-color:rgb(219, 219, 219);">   
+            <div class="header" style="height:100%; border-bottom-right-radius: 6vh;">
+                <div style="display:grid; grid-template-columns:1fr 1fr">
+                    <div style="grid-column:1; display:flex; flex-direction: column; justify-content:center; align-items:flex-start; padding:1.5vh;">
+                        <div class="header-font" style="display:flex; align-items:flex-end; margin-top: 1vh;">
+                            <div>올인원</div>
+                            <div style="font-size:50%;color:rgb(170,177,206);padding:0.4vh;">All-in-one</div>
+                        </div>
+                        <div class="header-font">에어케어시스템</div>
+                    </div>
+                    <div style="grid-column:2; display:flex; flex-direction: column; justify-content:start; align-items:flex-end; padding:1vh; height:100%;">
+                        <div class="header-font" style="font-size:2vh;margin-bottom:2%;">
+                            AENT
+                        </div>
+                        <!-- gmarket sans font 는 font-stretch 속성을 지원안함 -->
+                        <div class="header-font-medium" style="font-size:0.6vh;color:rgb(255, 255, 255);">AIR & ENVIRONMENT</div>
+                        <div class="header-font-medium" style="font-size:0.6vh;color:rgb(255, 255, 255)">TECHNOLOGY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div style="grid-row:2; display:grid; width:100%; height:100%; background-color:rgb(219, 219, 219);">
+            <!-- Tab content -->
+            <div class="main" style="grid-column:1; grid-row:1">
+                
+            </div>
+
+
+        </div>
+        <!-- separator -->
+        <div style="grid-row:3; background-color:#fff"></div>
+            <!-- menu -->
+        <div style="grid-row:4; z-index:500;">
+            <div class="tab" style="display:grid; grid-template-columns:repeat(5, 0.05fr 1fr) 0.05fr; 
+                background-color:#fff;padding-top:0vw; height:100%;">
+                <div class="separator" style="grid-column:1;">  <!-- separator -->
+                </div>
+                <div class="container" style="grid-column:2;">
+                    <div class="one layer-0" style="height:100%;">
+                        <div id="menu1" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu1">
+                            <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
+                                <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">에어 케어<br>시스템</div>
+                                </div>
+                            </div>
+                            <div id="round" style="z-index:500;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator" style="grid-column:3;">  <!-- separator -->
+                </div>
+                <div class="container" style="grid-column:4;">
+                    <div class="one layer-0" style="height:100%;">
+                        <div id="menu2" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu2">
+                            <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
+                                <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">실내공기<br>관리</div>
+                                </div>
+                            </div>
+                            <div id="round" style="z-index:500;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator" style="grid-column:5;">  <!-- separator -->
+                </div>
+                <div class="container" style="grid-column:6;">
+                    <div class="one layer-0" style="height:100%;">
+                        <div id="menu3" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu3">
+                            <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
+                                <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">Air<br>Wash</div>
+                                </div>
+                            </div>
+                            <div id="round" style="z-index:500;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator" style="grid-column:7;">  <!-- separator -->
+                </div>
+                <div class="container" style="grid-column:8;">
+                    <div class="one layer-0" style="height:100%;">
+                        <div id="menu4" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu4">
+                            <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
+                                <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">쾌적<br>제어</div>
+                                </div>
+                            </div>
+                            <div id="round" style="z-index:500;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator" style="grid-column:9;">  <!-- separator -->
+                </div>
+                <div class="container" style="grid-column:10;">
+                    <div class="one layer-0" style="height:100%;">
+                        <div id="menu5" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu5">
+                            <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
+                                <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">시스템<br>제어</div>
+                                </div>
+                            </div>
+                            <div id="round" style="z-index:500;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator" style="grid-column:11;">  <!-- separator -->
+                </div>
+            </div>
+        </div>
+        <!-- separator -->
+        <div style="grid-row:5; background-color:#fff"></div>
+    </div>
+
+
+      
+    <script>
+        function closePopup() {
+            $("#popup-wrap").fadeOut();
+            var curVid = document.getElementById('videoClip');
+            curVid.pause();
+            console.log('closePopup')
+        }
+
+jQuery($ => {
+    
+    let w = 150;
+    let h = 120;    
+    let r = [...Array($('.playpen').length)].map(x => 0);
+    let state = [...Array($('.playpen').length)].map(x => 0);
+    // console.log(r);
+    const animated_button = (e, r) => {
+        let x = 0;
+        let y = 100;
+        let gradient = '';
+        // console.log('animated_button')
+        // gradient += `radial-gradient(ellipse ${w*r}% ${h*r}% at ${x}% ${y}%, rgb(178, 123, 255) 0%, rgba(178,123,255,0.9) 33%, rgba(38,77,181,0) 100%)`;
+        gradient += `linear-gradient(45deg, rgb(178, 123, 255) 0%, rgba(178,123,255,0.9) ${33*r}%, rgba(38,77,181,0) ${80*r}%)`;
+        e.css('background', gradient);
+    }
+    $('.playpen').on('click', function(e) {
+        // console.log($(this))
+        // console.log($(this)[0].innerText)
+        // console.log($(this)[0].dataset)
+        $('.playpen').map((i, e) => {
+            // console.log(e)
+            // console.log(e.dataset)
+            // console.log(e.dataset.name)
+            // console.log(e.children)
+            // console.log(e.children[0].innerText)
+            if($(this)[0].innerText == e.children[0].innerText) {
+                console.log('match', i, r[i]);
+                // show content
+                console.log('#content'+(i+1))
+                console.log($('#content'+(i+1)))
+                if(i == 1) {
+                    console.log('content2-footer')
+                    // $('#content2-footer').hide();
+                    // $('#content2-footer').fadeIn(300);
+                    // $('#content2-footer').animate({marginTop:"+=100px"},300);
+                    $('#content'+(i+1)).fadeIn(300);
+                }
+                else {
+                    $('#content'+(i+1)).fadeIn(300);
+                }
+
+                // menu animation
+                // let obj = $(this);
+                let obj = $('#'+e.dataset.name);
+                console.log('#'+e.dataset.name);
+                console.log($('#'+e.dataset.name).width())
+                obj.parent().css('background-color', 'rgb(51,93,172)');
+                obj.parent().removeClass('layer-0 one')
+                console.log(obj.parent());
+                $('#round-selected').animate({'left':($('#'+e.dataset.name).offset().left + ($('#'+e.dataset.name).width()-$('#round-selected').width())*0.5)+'px'}, 300)
+                console.log($('#round-selected'))
+
+                if(i === 3) {
+                    $("#popup-wrap").css('display', 'flex').hide().fadeIn();
+                    $("#popup").css({
+                        position: 'absolute',
+                        top: '15%',
+                        left: '25%'
+                    })
+                    $('#popup-img').fadeIn();
+                    $('#popup-video').hide();
+                    // var curVid = document.getElementById('videoClip');
+                    // curVid.src = "img/When She Leaves by @Per-Olov Kindgren.mp4"
+                    // curVid.pause();
+                    // curVid.currentTime = 0;
+                    // curVid.play();
+
+               }
+                state[i] = 0;
+                setTimeout(function animate() {
+                    if(r[i] < 1) {
+                        r[i] += 0.05;
+                        if(r[i] > 1) r[i] = 1;
+                        animated_button(obj, r[i]);
+                        $('#content2-footer').css('height',5*r[i]+'vh')
+                        if(state[i] == 0) {
+                            setTimeout(animate, 10);
+                        }
+                    }
+                }, 10);
+            }
+            else {
+                console.log('not match', i, r[i]);
+                // hide content
+                $('#content'+(i+1)).fadeOut(300);
+                // $('#content'+(i+1)).slideUp(1000);
+                // if($('#content'+(i+1)) !== undefined) {
+                //     $('#content'+(i+1)).hide('slide', { direction: "down" }, 1000);
+                // }
+
+                // menu animation
+                let obj = $('#'+e.dataset.name);
+                console.log(obj);
+                obj.parent().addClass('layer-0 one')
+                state[i] = 1;
+                setTimeout(function animate() {
+                    if(r[i] > 0) {
+                        r[i] -= 0.05;
+                        if(r[i] < 0) r[i] = 0;
+                        animated_button(obj, r[i]);
+                        if(state[i] == 1) {
+                            setTimeout(animate, 10);
+                        }
+                    }
+
+                }, 10);
+            }
+        })
+    });
+    $('.playpen')[0].click();
+    $('#round-selected').animate({'top': ($('.playpen').eq(0).offset().top-$('#round-selected').height()*0.5)+'px'})
+
+    // popup window drag
+    // https://jamdol.tistory.com/46
+    var mousePosition;
+    var offset = [0,0];
+    var isDown = false;
+    var popObj;
+
+    console.log($('#popup-window'))
+
+    $('#popup-window').bind('touchstart', function(e) {
+        console.log('touchstart')
+        isDown = true;
+        var et = e.originalEvent;
+        offset = [
+            $('#popup-window-top').offset().left - et.targetTouches[0].pageX,
+            $('#popup-window-top').offset().top - et.targetTouches[0].pageY
+        ];
+        console.log(offset)
+    });
+    $('#popup-window').bind('touchmove', function(e) {
+        console.log('touchmove')
+        e.preventDefault();
+        if (isDown) {
+            console.log('touchmove isDown', e)
+            var et = e.originalEvent;
+            console.log('touchmove et', et)
+            mousePosition = {
+
+                x : et.targetTouches[0].pageX,
+                y : et.targetTouches[0].pageY
+
+            };
+            $('#popup-window-top').css('left', (mousePosition.x + offset[0]) + 'px');
+            $('#popup-window-top').css('top', (mousePosition.y + offset[1]) + 'px');
+            console.log(mousePosition.x + offset[0])
+        }
+    });
+    $('#popup-window').bind('touchend', function(e) {
+        console.log('touchend')
+        isDown = false;
+    });
+
+    $('#popup-window').mousedown(function(e) {
+        isDown = true;
+        popObj = $(this);
+        offset = [
+            $('#popup-window-top').offset().left - e.clientX,
+            $('#popup-window-top').offset().top - e.clientY
+        ];
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDown = false;
+    }, true);
+
+    document.addEventListener('mousemove', function(event) {
+        event.preventDefault();
+        if (isDown) {
+            console.log('mosemove')
+            mousePosition = {
+
+                x : event.clientX,
+                y : event.clientY
+
+            };
+            $('#popup-window-top').css('left', (mousePosition.x + offset[0]) + 'px');
+            $('#popup-window-top').css('top', (mousePosition.y + offset[1]) + 'px');
+        }
+    }, true);    
+
+    $('#close-popup').on('click', function() {
+        $("#popup-window-top").fadeOut();
+        var curVid = document.getElementById('videoClip');
+        curVid.pause();
+    })
+});   
+      </script>
+</body>
+</html>

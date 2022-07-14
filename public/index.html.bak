@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+  <style>
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 0px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab div {
+  background-color: #4472C4; /*4472C4*/
+  /* float: right; */
+  display:flex;
+  justify-content:end;
+  align-items:center;
+  border: 0px #000;
+  outline: solid 0px;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+  /* height: 100px; */
+  /* line-height: 100px; */
+  vertical-align: middle;
+}
+.tablinks {
+    display:flex;
+    justify-content:space-between;
+    /* margin-left: 1rem; */
+}
+/* Change background color of buttons on hover */
+.tab div:hover, .tabtext div:hover, .tabtext_lower div:hover {
+  background-color: #DAE3F3;
+}
+
+/* Create an active/current tablink class */
+.tab div.active, .tabtext div.active, .tabtext_lower div.active {
+    background-color: #DAE3F3;
+}
+.tabtext {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+.blank {
+    background-color: #DAE3F3 !important;
+    border-left: none;
+}
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-left: 0px solid #ccc;
+  border-top: none;
+}      
+
+.tabcontent {
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    background-color: #DAE3F3 !important;
+}
+.tablinks {
+    border-bottom: 0px solid #ccc;
+}
+.tabtext {
+    background-color:inherit; 
+    width:100%;
+    color:#000;
+    /* margin-right: 1rem; */
+}
+.popup-wrap {
+    background-color:rgba(0,0,0,.3); 
+    justify-content:center; 
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:none; 
+    padding:15px;
+    backdrop-filter: blur(4px);
+    backdrop-filter: grayscale(1);
+    -webkit-backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: grayscale(1);
+}
+.popup{
+  /* width:100%;
+  max-width:1000px; */
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.6); 
+  display:flex;
+  justify-content:center;
+}
+  </style>
+</head>
+<body>
+    <div style="display:grid; grid-template-columns: 1fr; grid-template-rows: 100px 1fr; width:100%; height:100%">
+        <div style="grid-column:1; grid-row:1;">
+            <div style="display:grid; grid-template-columns: 0.7fr 0.3fr; grid-template-rows: 1fr">
+                <div style="grid-row:1; grid-column:1; display:flex; justify-content: center; font-size:1.5rem;align-items: center;">
+                    올인원 에어케어시스템
+                </div>
+                <div style="grid-row:1; grid-column:2; display:flex; justify-content: flex-end; align-items: center;">
+                    <img src="img/logo.png" width="100px">
+                </div>
+            </div>
+        </div>
+        <div style="grid-column:1; grid-row:2; display:grid; grid-template-rows: 1fr 150px; grid-template-columns: 1fr; width:100%; height:100%">
+            <div class="tab" style="display:flex; flex-direction:row; grid-column:1; grid-row:2; height:100%;">
+                <div class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">
+                    <div class="tabtext" style="position: relative; background-image:url('img/menu1.png'); background-size:50%; background-repeat:no-repeat; background-position: 50% 15%; height:100%;">
+                        <div class="tabtext_lower" style="position:absolute; top:50%; height:50%; flex-direction:column; justify-content:center; align-items:center;">
+                            시스템<br>설명
+                        </div>
+                    </div>
+                </div>
+                <div class="tablinks" onclick="openCity(event, 'Paris')">
+                    <div class="tabtext" style="position: relative; background-image:url('img/menu1.png'); background-size:50%; background-repeat:no-repeat; background-position: 50% 15%; height:100%;">
+                        <div class="tabtext_lower" style="position:absolute; top:50%; height:50%; flex-direction:column; justify-content:center; align-items:center;">
+                            엔트<br>소개
+                        </div>
+                    </div>
+                </div>
+                <div class="tablinks" onclick="openCity(event, 'Tokyo')">
+                    <div class="tabtext" style="position: relative; background-image:url('img/menu1.png'); background-size:50%; background-repeat:no-repeat; background-position: 50% 15%; height:100%;">
+                        <div class="tabtext_lower" style="position:absolute; top:50%; height:50%; flex-direction:column; justify-content:center; align-items:center;">
+                            청정홈<br>시스템
+                        </div>
+                    </div>
+                </div>
+                <div class="tablinks" onclick="openCity(event, 'Tokyo1')">
+                    <div class="tabtext" style="position: relative; background-image:url('img/menu1.png'); background-size:50%; background-repeat:no-repeat; background-position: 50% 15%; height:100%;">
+                        <div class="tabtext_lower" style="position:absolute; top:50%; height:50%; flex-direction:column; justify-content:center; align-items:center;">
+                            산업용<br>시스템
+                        </div>
+                    </div>
+                </div>
+                <div class="tablinks" onclick="openCity(event, 'Tokyo2')">
+                    <div class="tabtext" style="position: relative; background-image:url('img/menu1.png'); background-size:50%; background-repeat:no-repeat; background-position: 50% 15%; height:100%;">
+                        <div class="tabtext_lower" style="position:absolute; top:50%; height:50%; flex-direction:column; justify-content:center; align-items:center;">
+                            연구시설<br>솔루션
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <!-- Tab content -->
+            <div class="main" style="grid-column:1; grid-row:1">
+                <img src="img/main.png" width="100%">
+            </div>
+
+            <div class="popup-wrap" id="popup-wrap" onclick="closePopup()">
+                <div class="popup" id="popup">
+                    <video id="videoClip" width="250" playsinline>
+                        <source src="img/When She Leaves by @Per-Olov Kindgren.mp4"
+                                type="video/mp4">
+                        Sorry, your browser doesn't support embedded videos.
+                    </video>                
+                </div>
+            </div>
+
+        </div>
+
+    
+    </div>
+
+
+      
+    <script>
+        function closePopup() {
+            $("#popup").fadeOut();
+            var curVid = document.getElementById('videoClip');
+            curVid.pause();
+            console.log('closePopup')
+        }
+
+        function openCity(evt, cityName) {
+            // Declare all variables
+            var i, tabcontent, tablinks, tabtext;
+
+            // Get all elements with class="tabcontent" and hide them
+            // tabcontent = document.getElementsByClassName("tabcontent");
+            // for (i = 0; i < tabcontent.length; i++) {
+            //     tabcontent[i].style.display = "none";
+            // }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            // Get all elements with class="tabtext" and remove the class "active"
+            tabtext = document.getElementsByClassName("tabtext");
+            for (i = 0; i < tabtext.length; i++) {
+                tabtext[i].className = tabtext[i].className.replace(" active", "");
+                tabtext[i].firstElementChild.className = tabtext[i].firstElementChild.className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            // document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+            evt.currentTarget.children[0].className += " active";
+            evt.currentTarget.children[0].firstElementChild.className += " active";
+            if(evt.currentTarget.children[1]) {
+                evt.currentTarget.children[1].className += " active";
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            switch(cityName) {
+                case 'London':
+                    console.log('London');
+                    $("#popup-wrap").css('display', 'flex').hide().fadeIn();
+                    $("#popup").css({
+                        position: 'absolute',
+                        top: '5%',
+                        left: '5%'
+                    })
+                    var curVid = document.getElementById('videoClip');
+                    curVid.src = "img/When She Leaves by @Per-Olov Kindgren.mp4"
+                    curVid.pause();
+                    curVid.currentTime = 0;
+                    curVid.play();
+                    break;
+                case 'Paris':
+                    console.log('London');
+                    $("#popup-wrap").css('display', 'flex').hide().fadeIn();
+                    $("#popup").css({
+                        position: 'absolute',
+                        top: '50%',
+                        left: '22%'
+                    })
+                    var curVid = document.getElementById('videoClip');
+                    curVid.src = "img/BLACKPINK - 'Kill This Love' M-V.mp4"
+                    curVid.pause();
+                    curVid.currentTime = 0;
+                    curVid.play();
+                    break;
+            }
+        }
+        document.getElementById("defaultOpen").click();
+
+$(document).ready(function() {
+    $(".tablinks").hover(
+        function() {
+            $(this).css("background-color", "#DAE3F3")
+            console.log($(this).children("div.tabtext"))
+            $(this).children("div.tabtext").css("background-color", "#DAE3F3")
+            $(this).children("div.tabtext").children("div.tabtext_lower").css("background-color", "#DAE3F3")
+            console.log($(this).parent())
+        },
+        function() {
+            if($(this).hasClass("active") === false) {
+                $(this).css("background-color", "#4472C4")
+                $(this).children("div.tabtext").css("background-color", "#4472C4")
+                $(this).children("div.tabtext").children("div.tabtext_lower").css("background-color", "#4472C4")
+            }
+        }
+    )
+    $(".tablinks").click(
+        function() {
+            $(".tablinks, .tabtext, .tabtext_lower").css("background-color", "#4472C4")
+            $(this).css("background-color", "#DAE3F3")
+            $(this).children("div.tabtext").css("background-color", "#DAE3F3")
+            $(this).children("div.tabtext").children("div.tabtext_lower").css("background-color", "#DAE3F3")
+        },
+    )
+})
+      </script>
+</body>
+</html>
