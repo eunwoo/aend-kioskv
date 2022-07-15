@@ -464,6 +464,46 @@ html, body {
 
 jQuery($ => {
     
+    function show_popup(para) {
+        if(para.type === 'video') {
+            $("#popup-window-top").css('display', 'flex').hide().fadeIn();
+            $("#popup-window-top").css({
+                position: 'absolute',
+                left: para.x,
+                top: para.y
+            })
+
+            $('#popup-img').hide();
+            $('#popup-video').fadeIn();
+            var curVid = document.getElementById('videoClip');
+            curVid.pause();
+            curVid.src = "img/When She Leaves by @Per-Olov Kindgren.mp4"
+            curVid.currentTime = 0;
+            curVid.play();
+        }
+        else if(para.type === 'image') {
+            var curVid = document.getElementById('videoClip');
+            curVid.pause();
+
+            $("#popup-window-top").css('display', 'flex').hide().fadeIn();
+            $("#popup-window-top").css({
+                position: 'absolute',
+                left: para.x,
+                top: para.y
+            })
+            $('#popup-img').fadeIn();
+            $('#popup-video').hide();
+        }
+        else {
+
+        }
+    }
+    function hide_popup() {
+        var curVid = document.getElementById('videoClip');
+        curVid.pause();
+        $("#popup-window-top").fadeOut();
+    }
+
     let w = 150;
     let h = 120;    
     let r = [...Array($('.playpen').length)].map(x => 0);
@@ -515,21 +555,20 @@ jQuery($ => {
                 $('#round-selected').animate({'left':($('#'+e.dataset.name).offset().left + ($('#'+e.dataset.name).width()-$('#round-selected').width())*0.5)+'px'}, 300)
                 console.log($('#round-selected'))
 
-                if(i === 3) {
-                    $("#popup-wrap").css('display', 'flex').hide().fadeIn();
-                    $("#popup").css({
-                        position: 'absolute',
-                        top: '15%',
-                        left: '25%'
-                    })
-                    $('#popup-img').fadeIn();
-                    $('#popup-video').hide();
-                    // var curVid = document.getElementById('videoClip');
-                    // curVid.src = "img/When She Leaves by @Per-Olov Kindgren.mp4"
-                    // curVid.pause();
-                    // curVid.currentTime = 0;
-                    // curVid.play();
-
+                if(i === 0) {
+                    show_popup({'type':'video', 'x':'10%', 'y':'5%'});
+                }
+                else if(i === 1) {
+                    show_popup({'type':'image', 'x':'2%', 'y':'45%'});
+                }
+                else if(i === 2) {
+                    show_popup({'type':'video', 'x':'20%', 'y':'30%'});
+                }
+                else if(i === 3) {
+                    show_popup({'type':'image', 'x':'15%', 'y':'25%'});
+                }
+                else if(i === 4) {
+                    show_popup({'type':'image', 'x':'40%', 'y':'15%'});
                }
                 state[i] = 0;
                 setTimeout(function animate() {
