@@ -8,7 +8,7 @@ const port = 3110;
 console.log(process.argv[2])
 
 app.get('', (req, res) => {
-    res.sendFile(__dirname + '/public/index1.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 app.use(express.static('public'))
 
