@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/setting.js"></script>
     <title>Document</title>
   <style>
 /* Style the tab */
 .tab {
   overflow: hidden;
   border: 0px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -51,7 +53,7 @@
 } */
 
 .blank {
-    background-color: #DAE3F3 !important;
+    background-color: #ffffff !important;
     border-left: none;
 }
 /* Style the tab content */
@@ -74,7 +76,7 @@
 html, body {
     margin: 0;
     height: 100%;
-    background-color: #DAE3F3 !important;
+    background-color: #ffffff !important;
     font-size: 1.5vh;
     text-align: left;
     font-family: 'GmarketSansMedium';
@@ -190,8 +192,8 @@ html, body {
     /* --radius: 80px; */
     /* width:var(--radius);
     height:var(--radius); */
-    width: 40%;
-    height: 30%;
+    width: 9vw;
+    height: 5vh;
     position:absolute;
     left:15%; 
     top:10%; 
@@ -220,7 +222,7 @@ html, body {
     /* height:5px; */
 }
 .right-menu-font-size {
-    font-size: 2.4vw;
+    font-size: 3.1vw;
     /* text-align: left; */
     font-family: 'GmarketSansMedium';
     font-weight:normal;
@@ -300,18 +302,17 @@ html, body {
         </div>
 
         <!-- popup -->
-        <div id="popup-window-top" class="font-light" style="position:absolute; display:flex; justify-content:center; align-items:center; z-index:400; font-size:2vh; width:60%; height:40%; left:30%;top:30%;">
+        <div id="popup-window-top" class="font-light" style="position:absolute; display:flex; justify-content:center; align-items:center; z-index:400; font-size:2vh; width:60%; height:30%; left:30%;top:30%;">
             <div id="popup-window" style="display:flex;width:90%; height:90%; background-color:rgb(255,255,255);">
                 <div class="popup popup-wrap" style="display:grid;justify-content:center; align-content:center; 
                 grid-template-columns:1fr; grid-template-rows:0.03fr 1fr 0.03fr 0.5fr; grid-gap:-10px; width:90%; height:90%; position:absolute; left:5%;">
                     <div style="grid-row:1;width:90%;height:100%;"></div>
-                    <div style="grid-row:2; background-color:rgb(240,240,240);width:96%;margin-left:2%;">
-                        <div id="popup-img" style="overflow:hidden;">
-                            <img src="img/portfolio1.png" width="100%">
+                    <div style="grid-row:2; background-color:rgb(255,255,255);width:96%;margin-left:2%;height:100%;">
+                        <div id="popup-img" style="overflow:hidden; background-size:contain; background-repeat:no-repeat; width:100%; height:100%; background-position:center;">
                         </div>
                         <div id="popup-video">
                             <video id="videoClip" width="100%" height="100%" playsinline>
-                                <source src="video/When She Leaves by @Per-Olov Kindgren.mp4"
+                                <source src="vid/When She Leaves by @Per-Olov Kindgren.mp4"
                                         type="video/mp4">
                                 Sorry, your browser doesn't support embedded videos.
                             </video>                
@@ -325,10 +326,10 @@ html, body {
                         </div>
                 </div>
             </div>
-            <div id="close-popup" class="popup" style="position:absolute; right:0%;top:0%;border-radius:50%; font-size:1vh; color:rgb(30,30,30); background-color:rgb(255,255,255);width:10%;height:10%;display:flex;justify-content:center; align-items:center;">X</div>
+            <div id="close-popup" class="popup" style="position:absolute; right:0%;top:0%;border-radius:50%; font-size:1.5vh; color:rgb(30,30,30); background-color:rgb(255,255,255);width:3vh;height:3vh;display:flex;justify-content:center; align-items:center;">X</div>
         </div>
         <!-- header -->
-        <div style="grid-row:1; background-color:rgb(219, 219, 219);">   
+        <div style="grid-row:1; background-color:rgb(255, 255, 255);">   
             <div class="header" style="height:100%; border-bottom-right-radius: 6vh;">
                 <div style="display:grid; grid-template-columns:1fr 1fr">
                     <div style="grid-column:1; display:flex; flex-direction: column; justify-content:center; align-items:flex-start; padding:1.5vh;">
@@ -350,9 +351,9 @@ html, body {
             </div>
         </div>
         <!-- content -->
-        <div style="grid-row:2; display:grid; width:100%; height:100%; background-color:rgb(219, 219, 219);">
+        <div style="grid-row:2; display:grid; width:100%; height:100%; background-color:rgb(255, 255, 255);">
             <!-- Tab content -->
-            <div class="main" style="grid-column:1; grid-row:1">
+            <div id="main-content" class="main" style="grid-column:1; grid-row:1; overflow:hidden; background-size:contain; background-repeat:no-repeat; width:100%; height:100%; background-position:center;">
                 
             </div>
 
@@ -371,7 +372,7 @@ html, body {
                         <div id="menu1" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu1">
                             <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
                                 <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
-                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/에어케어시스템.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510; margin-top:2vh;margin-left:1vw;"></div>
                                     <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">에어 케어<br>시스템</div>
                                 </div>
                             </div>
@@ -387,7 +388,7 @@ html, body {
                         <div id="menu2" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu2">
                             <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
                                 <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
-                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/실내공기관리.png); background-repeat:no-repeat; background-position:center; background-size: 5.5vh; z-index:510; margin-top:2vh;margin-left:1vw;"></div>
                                     <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">실내공기<br>관리</div>
                                 </div>
                             </div>
@@ -403,7 +404,7 @@ html, body {
                         <div id="menu3" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu3">
                             <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
                                 <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
-                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/AirWash.png); background-repeat:no-repeat; background-position:center; background-size: 4.5vh; z-index:510; margin-top:2vh;margin-left:1vw;"></div>
                                     <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">Air<br>Wash</div>
                                 </div>
                             </div>
@@ -419,7 +420,7 @@ html, body {
                         <div id="menu4" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu4">
                             <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
                                 <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
-                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/쾌적제어.png); background-repeat:no-repeat; background-position:center; background-size: 4.5vh; z-index:510; margin-top:2vh;margin-left:1vw;"></div>
                                     <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">쾌적<br>제어</div>
                                 </div>
                             </div>
@@ -435,8 +436,8 @@ html, body {
                         <div id="menu5" class="tablinks one playpen" style="position:relative; overflow:hidden;height:100%;" data-name="menu5">
                             <div class="tabtext" style="position:relative;z-index:600;height:100%;flex-direction:column;">
                                 <div style="display:grid;grid-template-columns:1fr; grid-template-rows: 1.2fr 1fr; width:100%; height:100%; z-index:510;">
-                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/menu1.png); background-repeat:no-repeat; background-position:center; background-size: 40%; z-index:510;"></div>
-                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">시스템<br>제어</div>
+                                    <div style="grid-row:1; grid-column:1; width:100%; height:100%; background-image:url(img/시스템케어.png); background-repeat:no-repeat; background-position:center; background-size: 4.5vh; z-index:510; margin-top:2vh;margin-left:1vw;"></div>
+                                    <div class="right-menu-font-size" style="grid-row:2; grid-column:1; width:100%; height:100%">시스템<br>케어</div>
                                 </div>
                             </div>
                             <div id="round" style="z-index:500;">
@@ -461,48 +462,67 @@ html, body {
             curVid.pause();
             console.log('closePopup')
         }
+function gotoHome()
+{
+  $('.playpen')[0].click();
+}
+function media_type(filename) {
+  filename_split = filename.split('.')
+  filename_ext = filename_split[filename_split.length - 1]
+  let is_image = false;
+  ['png', 'jpg'].forEach( (str) => {
+    if(str === filename_ext) is_image = true;
+  });
+  if(is_image === true) return 'image';
+  else return 'video';
+}    
+function show_popup(para) {
+  type = media_type(para.file)
+  if(type === 'video') {
+    $("#popup-window-top").css('display', 'flex').hide().fadeIn();
+    $("#popup-window-top").css({
+        position: 'absolute',
+        left: para.x,
+        top: para.y
+    })
 
+    $('#popup-img').hide();
+    $('#popup-video').fadeIn();
+    var curVid = document.getElementById('videoClip');
+    curVid.pause();
+    curVid.src = `vid/${para.file}`
+    curVid.currentTime = 0;
+    curVid.play();
+    curVid.addEventListener('ended', () => { 
+      console.log('video finished'); 
+      hide_popup();
+    })    
+  }
+  else if(type === 'image') {
+    var curVid = document.getElementById('videoClip');
+    curVid.pause();
+    console.log(para.file)
+    $('#popup-img').css('background-image', `url(img/${para.file})`);
+    $("#popup-window-top").css('display', 'flex').hide().fadeIn();
+    $("#popup-window-top").css({
+        position: 'absolute',
+        left: para.x,
+        top: para.y
+    })
+    $('#popup-img').fadeIn();
+    $('#popup-video').hide();
+  }
+  else {
+
+  }
+}
+function hide_popup() {
+  var curVid = document.getElementById('videoClip');
+  curVid.pause();
+  $("#popup-window-top").fadeOut();
+}
 jQuery($ => {
-    
-    function show_popup(para) {
-        if(para.type === 'video') {
-            $("#popup-window-top").css('display', 'flex').hide().fadeIn();
-            $("#popup-window-top").css({
-                position: 'absolute',
-                left: para.x,
-                top: para.y
-            })
 
-            $('#popup-img').hide();
-            $('#popup-video').fadeIn();
-            var curVid = document.getElementById('videoClip');
-            curVid.pause();
-            curVid.src = "img/When She Leaves by @Per-Olov Kindgren.mp4"
-            curVid.currentTime = 0;
-            curVid.play();
-        }
-        else if(para.type === 'image') {
-            var curVid = document.getElementById('videoClip');
-            curVid.pause();
-
-            $("#popup-window-top").css('display', 'flex').hide().fadeIn();
-            $("#popup-window-top").css({
-                position: 'absolute',
-                left: para.x,
-                top: para.y
-            })
-            $('#popup-img').fadeIn();
-            $('#popup-video').hide();
-        }
-        else {
-
-        }
-    }
-    function hide_popup() {
-        var curVid = document.getElementById('videoClip');
-        curVid.pause();
-        $("#popup-window-top").fadeOut();
-    }
 
     let w = 150;
     let h = 120;    
@@ -555,21 +575,8 @@ jQuery($ => {
                 $('#round-selected').animate({'left':($('#'+e.dataset.name).offset().left + ($('#'+e.dataset.name).width()-$('#round-selected').width())*0.5)+'px'}, 300)
                 console.log($('#round-selected'))
 
-                if(i === 0) {
-                    show_popup({'type':'video', 'x':'10%', 'y':'5%'});
-                }
-                else if(i === 1) {
-                    show_popup({'type':'image', 'x':'2%', 'y':'45%'});
-                }
-                else if(i === 2) {
-                    show_popup({'type':'video', 'x':'20%', 'y':'30%'});
-                }
-                else if(i === 3) {
-                    show_popup({'type':'image', 'x':'15%', 'y':'25%'});
-                }
-                else if(i === 4) {
-                    show_popup({'type':'image', 'x':'40%', 'y':'15%'});
-               }
+                $('#main-content').css('background-image', `url("img/${content[i]['main']}")`);
+                show_popup({'x':content[i]['popup-position'][0], 'y':content[i]['popup-position'][1], 'file': content[i]['popup']});
                 state[i] = 0;
                 setTimeout(function animate() {
                     if(r[i] < 1) {
@@ -611,7 +618,7 @@ jQuery($ => {
             }
         })
     });
-    $('.playpen')[0].click();
+    gotoHome();
     $('#round-selected').animate({'top': ($('.playpen').eq(0).offset().top-$('#round-selected').height()*0.5)+'px'})
 
     // popup window drag
