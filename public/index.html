@@ -466,6 +466,26 @@ function gotoHome()
 {
   $('.playpen')[0].click();
 }
+
+let timerGotoHomeID = null;   
+function register_close_popup() {
+    console.log('register timer for closing popup')
+    if(timerGotoHomeID === null) {
+        timerGotoHomeID = setTimeout(() => {
+            hide_popup();
+        }, 60000);
+    }
+    else {
+        clearTimeout(timerGotoHomeID);
+        timerGotoHomeID = setTimeout(() => {
+            hide_popup();
+        }, 60000);
+    }
+}
+function cancel_close_popup() {
+    clearTimeout(timerGotoHomeID);
+}
+
 function media_type(filename) {
   filename_split = filename.split('.')
   filename_ext = filename_split[filename_split.length - 1]
@@ -511,6 +531,8 @@ function show_popup(para) {
     })
     $('#popup-img').fadeIn();
     $('#popup-video').hide();
+
+    register_close_popup();  
   }
   else {
 
